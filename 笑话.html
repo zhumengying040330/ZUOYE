@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission2</title>
+</head>
+<body>
+    <!-- 
+    今天气温 35 摄氏度，${targetUser}出门散步。当走到${place}门前时，突然就${action}。人们都惊呆了，${sourceUser}全程目睹但并没有慌，因为${targetUser}是一个 140 公斤的胖子，天气又辣么热。
+     -->
+    <p class="content"></p>
+    请输入一个名字：<input type="text" class="text1"></input>
+    <button type="button" id="button1" class="generate">点击生成笑话</button>
+</body>
+<script>
+    var content = '这句话会展现出来';
+    var joke = generateJoke();
+    btn = document.querySelector("#button1");
+    btn.addEventListener('click', clickButton);
+    // p.innerHTML = joke;
+
+
+    // 生成一个笑话 
+    function generateJoke() {
+        var targetUsers = ['zmy', 'hyx', 'xyn', 'lbj', 'xht'];
+        var places = ['A楼306', 'B楼407', '游泳馆', '羽毛球馆', '水族馆', '校门口'];
+        var actions = ['在人群中化成了一滩水', '变成了一道闪电', '变成一只乌龟爬走了', '就爆炸了', '突然就变成卡面来打了'];
+        // 随机拿到数组的一个元素
+        var targetUser = getElement(targetUsers);
+        // var targetUser = targetUsers[?];
+        var place = getElement(places);
+        var action = getElement(actions);
+        // 拿到text里面的值
+        var sourceUser = document.querySelector(".text1").value || '陈开箱';
+        // var sourceUser = '朱梦莹';
+        var joke = `今天气温 ${ Math.random() * 30 } 摄氏度，${targetUser}出门散步。当走到${place}门前时，突然就${action}。人们都惊呆了，${sourceUser}全程目睹但并没有慌，因为${targetUser}是一个 140 公斤的胖子，天气又辣么热。`;
+        // 测试一下生成的结果
+        console.log(joke);
+        return joke;
+    }
+    function getElement(arr) {
+        var index = Math.floor(Math.random() * arr.length);
+        return arr[index];
+    }
+
+    function clickButton() {
+        var p = document.querySelector(".content");
+        console.log(p);
+        content = generateJoke();
+        p.innerHTML = content;
+    }
+</script>
+</html>

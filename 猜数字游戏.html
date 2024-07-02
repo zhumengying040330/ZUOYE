@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Number guessing game</title>
+
+    <style>
+      html {
+        font-family: sans-serif;
+      }
+
+      body {
+        width: 50%;
+        max-width: 800px;
+        min-width: 480px;
+        margin: 0 auto;
+      }
+      
+      .form input[type="number"] {
+        width: 200px;
+      }
+
+      .lastResult {
+        color: black;
+        padding: 3px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Number guessing game</h1>
+
+    <p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if your guess was too high or too low.</p>
+
+    <div class="form">
+      <label for="guessField">Enter a guess: </label>
+      <input type="number" min="1" max="100" required id="guessField" class="guessField">
+      <input type="submit" value="Submit guess" class="guessSubmit">
+    </div>
+
+    <div class="resultParas">
+      <p class="guesses"></p>
+      <p class="lastResult"></p>
+      <p class="lowOrHi"></p>
+    </div>
+
+    <script>
+      //随机生成一个1到100之间的自然数
+      var num = Math.round(Math.random() * 100);
+      console.log(num);
+      // 记录玩家当前的轮数，从1开始
+      var loop = 1;
+      //获取当前用户的数字
+      var current_num = document.querySelector("#quessField").value;
+      console.log("current_num");
+      //当用户点击的时候，拿到数字
+      var btn = document.querySelector(".guessSubmit");
+      btn.addEventListener("click",clickBtn);
+      //记录用户每次猜的数值
+      num = [];
+      function clickBtn(){
+        //获取用户输入
+        var current_num = document.querySelector("#quessField").value;
+        console.log(current_num);
+        //然后输入他是否正确
+        if (current_num == num){
+          //如果正确
+          //显示祝贺消息
+          renderResult("你做对了")
+        }else{
+          if (current_num > num){
+            renderResult("猜错了，答案比你小");
+          }else{
+            renderResult("猜错了，答案比你大");
+          }
+        }
+        //记录用户的输入
+        console.log("用户这次输入的是",current_num);
+        nums.push(current_num);
+        console.log("用户的历史猜测",nums);
+        //将这个历史猜测展示在HTML页面
+        document.querySelector("#guesses").innerHTML = nums;
+      }
+      //渲染答案到HTML页面中
+      function querySelector(content){
+        //获取要渲染的元素
+        var ele = document.querySelector('.lastResult');
+        console.log(document.querySelector('.lastResult'));
+        //将你要渲染的内容放上去
+        ele.innerHTML = content;
+      }
+    </script>
+  </body>
+</html>
